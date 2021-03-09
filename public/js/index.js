@@ -3,7 +3,11 @@
 const prefix = 'LT_';
 const TaskInfo = document.getElementById('task-info');
 const parent = document.getElementById('task-list');
+let limit= 0;
 
+setTimeout(function(){limit = 0;},60000);
+
+// Create DOM Element
 function createElement(elm, content) {
   const parts = document.createElement(elm);
   parts.textContent = content;
@@ -29,17 +33,21 @@ function createTaskCard(no, data) {
 
 
 function store() {
+
+  console.log(limit);
+  if(limit == 4) throw alert('追加可能数を超えています!');
+
+  let timestamp = new Date().getTime();
   let task = {
     subject: TaskInfo.value,
     complete: 0,
+    createdAt: timestamp,
   };
-  console.log(task.subject);
   let obj = JSON.stringify(task);
   localStorage.setItem(prefix + task.subject, obj);
+  limit++;
   location.reload();
 }
-
-
 
 function setCompleteStatus(no) {
   console.log(no);
@@ -57,20 +65,31 @@ function setCompleteStatus(no) {
   location.reload();
 }
 
+function cmpTime(timestamp) {
+  let nowTime = new Date().getTime();
+  let diff = (nowTime - timestamp) / 1000;
+  console.log(diff);
+  const limit = 60*60*24; //24h
+  if(diff > limit) return 1;
+  return 0;
+}
+
 // Display preset
 window.onload = function() {
   if (localStorage.length == 0) {
     const msg = createElement('p', 'タスクがありません');
-    console.log(msg);
   } else {
     for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-
-      let obj = localStorage.getItem(key);
+      const taskName = localStorage.key(i);
+      let obj = localStorage.getItem(taskName);
       let taskData = JSON.parse(obj);
-      console.log(taskData);
-      if (!taskData.includes(prefix)) continue;
-      createTaskCard(i, taskData);
+
+      if(cmpTime(taskData.createdAt) == 1)
+        localStorage.removeItem(taskName);
+
+      if (!taskName.includes(prefix) || taskData.complete == 1) continue;
+      createTaskCard(i, taskName);
+      limit++;
     }
   }
 };

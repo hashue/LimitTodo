@@ -1,20 +1,21 @@
 <html>
 
 <head>
-  <title>Express</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Express</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
+    <header class="text-center p-5 bg-green-300">
+        <h1 >Express</h1>
+    </header>
 
-  <input id="task-info" type="text" name="task-info">
-  <button onclick="store();">追加</button>
+    <input id="task-info" type="text" name="task-info">
+    <button onclick="store();">追加</button>
 
-  <div id="task-list"></div>
+    <div class="flex flex-col mx-auto max-w-5xl w-4/5" id="task-list"></div>
 
-  <script src="/js/index.js"></script>
+    <script src="/js/index.js"></script>
 
 </body>
 

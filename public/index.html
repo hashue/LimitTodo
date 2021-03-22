@@ -7,14 +7,16 @@
 
 <body>
     <header class="text-center p-5 bg-green-300">
-        <h1 >Express</h1>
+        <h1>Express</h1>
     </header>
 
-    <input id="task-info" type="text" name="task-info">
-    <button onclick="store();">追加</button>
-
-    <div class="flex flex-col mx-auto max-w-5xl w-4/5" id="task-list"></div>
-
+    <div class="st-wrapper flex flex-col mx-auto max-w-5xl w-4/5">
+      <h2>Inbox</h2>
+        <div id="taskinput">
+          <input id="task-info" class="w-4/5 bg-gray-200 my-8 mx-24 p-3 text-xs rounded-lg border border-trasparent focus:border-blue-300" type="text"name="task-info" placeholder="タスクを入力してください">
+        </div>
+        <div class="flex flex-col " id="task-list"></div>
+    </div>
     <script src="/js/index.js"></script>
 
 </body>

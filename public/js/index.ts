@@ -10,17 +10,12 @@ interface Task{
   createdAt:number;
 };
 
-// setTimeout(forceRemoveTask(), 10000);
-// 
-// function forceRemoveTask() {
-//   for (let i = 0; i < localStorage.length; i++) {
-//     const taskName: string = localStorage.key(i);
-//     let obj = localStorage.getItem(taskName) as string;
-//     // let taskData: any = JSON.parse(obj);
-//     // if (cmpTime(taskData.createdAt) == 1) localStorage.removeItem(taskName);
-//     if (!taskName.includes(prefix)) continue;
-//   }
-// }
+//If press enter key,call store function
+TaskInfo.addEventListener('keypress',(e)=>{
+  const key:number = e.keyCode;
+  if(TaskInfo.value!="" && key == 13) store(); //13 == enter
+});
+
 
 // Create DOM Element
 function createElement(elm:string, content:string):HTMLElement {
@@ -29,30 +24,31 @@ function createElement(elm:string, content:string):HTMLElement {
   return parts;
 }
 
-
+//create Task
 function createTaskCard(no:number, data:string) {
+
   const parent:HTMLElement = document.getElementById('task-list');
   const div:HTMLElement = document.createElement('div');
-  div.className = ' task-card mx-24 p-8 shadow-lg bg-gray-100 rounded-md w-3/5';
+  div.className = ' task-card mx-24 p-8 border-b';
 
-  const taskInfo:HTMLElement = document.createElement('p');
+  //const taskInfo:HTMLElement = document.createElement('p');
+  const taskInfo:HTMLElement = document.createElement('span');
   taskInfo.textContent = data.slice(3);
-  taskInfo.className = 'float-left mr-96 ml-16';
+  taskInfo.className = ' ml-4';
 
   const statusBtn:HTMLElement = document.createElement('button');
   statusBtn.textContent = '完了';
   statusBtn.setAttribute('onclick', 'setCompleteStatus(this.value)');
   statusBtn.setAttribute('value', no.toString());
-  statusBtn.className = 'mx-8 inset-y-0.right-0 absolute';
 
-  div.appendChild(taskInfo);
+
   div.appendChild(statusBtn);
+  div.appendChild(taskInfo);
   parent.appendChild(div);
 }
 
 
 function store() {
-  console.log(limit);
   if (limit == 4) throw alert('追加可能数を超えています!');
 
   let timestamp = new Date().getTime();
@@ -69,27 +65,22 @@ function store() {
 
 // set complete status
 function setCompleteStatus(no:string) {
-  console.log(no);
   let beforeSubject:string = localStorage.key(parseInt(no));
-  console.log(beforeSubject);
 
   let updateData = {
     subject: beforeSubject,
     complete: 1,
   };
 
-  console.log(updateData.subject);
   let obj = JSON.stringify(updateData);
   localStorage.setItem(updateData.subject, obj);
   location.reload();
 }
 
-function cmpTime(timestamp:number) {
+function cmpTime(timestamp:number):number {
   let nowTime:number = new Date().getTime();
   let diff:number = (nowTime - timestamp) / 1000;
-  console.log(diff);
-  //  const limit = 60 * 60 * 24;  // 24h
-  const limit:number = 10;
+  const limit = 60 * 60 * 24;  // 24h
   if (diff > limit) return 1;
   return 0;
 }

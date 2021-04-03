@@ -19,7 +19,7 @@ function createElement(elm, content) {
 function createTaskCard(no, data) {
     var parent = document.getElementById('task-list');
     var div = document.createElement('div');
-    div.className = ' task-card mx-24 p-8 border-b';
+    div.className = ' task-card mx-24 p-8 border-b h-8';
     //const taskInfo:HTMLElement = document.createElement('p');
     var taskInfo = document.createElement('span');
     taskInfo.textContent = data.slice(3);
@@ -28,8 +28,13 @@ function createTaskCard(no, data) {
     statusBtn.textContent = '完了';
     statusBtn.setAttribute('onclick', 'setCompleteStatus(this.value)');
     statusBtn.setAttribute('value', no.toString());
+    var removeBtn = document.createElement('button');
+    removeBtn.textContent = '削除';
+    removeBtn.setAttribute('onclick', 'removeTask(this.value)');
+    removeBtn.setAttribute('value', no.toString());
     div.appendChild(statusBtn);
     div.appendChild(taskInfo);
+    div.appendChild(removeBtn);
     parent.appendChild(div);
 }
 function store() {
@@ -64,6 +69,10 @@ function cmpTime(timestamp) {
     if (diff > limit)
         return 1;
     return 0;
+}
+function removeTask(no) {
+    localStorage.removeItem(localStorage.key(no));
+    location.reload();
 }
 // Display preset
 window.onload = function () {

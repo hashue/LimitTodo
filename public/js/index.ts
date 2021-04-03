@@ -29,7 +29,7 @@ function createTaskCard(no:number, data:string) {
 
   const parent:HTMLElement = document.getElementById('task-list');
   const div:HTMLElement = document.createElement('div');
-  div.className = ' task-card mx-24 p-8 border-b';
+  div.className = ' task-card mx-24 p-8 border-b h-8';
 
   //const taskInfo:HTMLElement = document.createElement('p');
   const taskInfo:HTMLElement = document.createElement('span');
@@ -42,8 +42,15 @@ function createTaskCard(no:number, data:string) {
   statusBtn.setAttribute('value', no.toString());
 
 
+  const removeBtn:HTMLElement = document.createElement('button');
+  removeBtn.textContent = '削除';
+  removeBtn.setAttribute('onclick', 'removeTask(this.value)');
+  removeBtn.setAttribute('value', no.toString());
+
+
   div.appendChild(statusBtn);
   div.appendChild(taskInfo);
+  div.appendChild(removeBtn);
   parent.appendChild(div);
 }
 
@@ -83,6 +90,11 @@ function cmpTime(timestamp:number):number {
   const limit = 60 * 60 * 24;  // 24h
   if (diff > limit) return 1;
   return 0;
+}
+
+function removeTask(no:number){
+  localStorage.removeItem(localStorage.key(no));
+  location.reload();
 }
 
 // Display preset

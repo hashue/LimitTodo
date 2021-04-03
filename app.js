@@ -4,9 +4,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var settingRouter = require('./routes/setting');
 
 var app = express();
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -17,6 +20,6 @@ app.use('/static', express.static(__dirname + '/public'));
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/settings', settingRouter);
 
 module.exports = app;

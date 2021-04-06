@@ -1,9 +1,10 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var express            = require('express');
+var path               = require('path');
+var cookieParser       = require('cookie-parser');
+var logger             = require('morgan');
 
-var indexRouter = require('./routes/index');
+var indexRouter        = require('./routes/index');
+var introductionRouter = require('./routes/introduction');
 // var settingRouter = require('./routes/setting');
 
 var app = express();
@@ -19,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/static', express.static(__dirname + '/public'));
 
 
-app.use('/', indexRouter);
-app.use('/settings', settingRouter);
+app.use('/inbox', indexRouter);
+app.use('/', introductionRouter);
 
 module.exports = app;

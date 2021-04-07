@@ -5,11 +5,11 @@ var counter = 0;
 var taskLimit = 4;
 var removeIcon = "\n  <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" class='w-5 h-5'>\n    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16\" />\n  </svg>\n";
 ;
-//If press enter key,call store function
+// If press enter key,call store function
 TaskInfo.addEventListener('keypress', function (e) {
     var key = e.keyCode;
-    if (TaskInfo.value != "" && key == 13)
-        store(); //13 == enter
+    if (TaskInfo.value != '' && key == 13)
+        store(); // 13 == enter
 });
 // Create DOM Element
 function createElement(elm, content) {
@@ -17,7 +17,7 @@ function createElement(elm, content) {
     parts.textContent = content;
     return parts;
 }
-//create Task
+// create Task
 function createTaskCard(no, data) {
     var parent = document.getElementById('task-list');
     var div = document.createElement('div');
@@ -26,7 +26,7 @@ function createTaskCard(no, data) {
     taskInfo.textContent = data.slice(3);
     taskInfo.className = ' ml-4';
     var buttonWrapper = document.createElement('div');
-    buttonWrapper.className = "text-right";
+    buttonWrapper.className = 'text-right';
     var statusBtn = document.createElement('input');
     statusBtn.textContent = '完了';
     statusBtn.setAttribute('onclick', 'setCompleteStatus(this.value)');
@@ -91,7 +91,8 @@ window.onload = function () {
         createTaskCard(i, taskName);
         counter++;
         var remainTask = taskLimit - counter;
-        var limitCountElm = document.getElementById("task-limit");
-        limitCountElm.textContent = "残り追加可能タスク数: " + remainTask.toString();
+        var limitCountElm = document.getElementById('task-limit');
+        limitCountElm.textContent =
+            '残り追加可能タスク数: ' + remainTask.toString();
     }
 };

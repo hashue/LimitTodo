@@ -2,11 +2,13 @@
   "name": "limittodo",
   "version": "0.0.0",
   "private": true,
+  "type":"module",
   "scripts": {
     "start": "node ./bin/www",
     "css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css"
   },
   "dependencies": {
+    "@types/node": "^14.14.37",
     "autoprefixer": "^10.2.5",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

@@ -71,6 +71,7 @@ function cmpTime(timestamp) {
     var nowTime = new Date().getTime();
     var diff = (nowTime - timestamp) / 1000;
     var limit = 60 * 60 * 24; // 24h
+    console.log("diff: " + diff);
     if (diff > limit)
         return 1;
     return 0;

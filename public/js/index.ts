@@ -11,12 +11,11 @@ const removeIcon: string = `
   </svg>
 `
 
-    interface Task {
+interface Task {
   subject: string;
   complete: number;
   createdAt: number;
-}
-;
+};
 
 // If press enter key,call store function
 TaskInfo.addEventListener('keypress', (e) => {
